@@ -24,6 +24,13 @@ NODE_OPTIONS = "--max-old-space-size=1536"
 [processes]
 app = "node dist/index.js gateway --allow-unconfigured --port 3000 --bind lan"
 
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
 # NOTE: No [http_service] block = no public ingress allocated.
 # The gateway will only be accessible via:
 #   - fly proxy 3000:3000 -a <app-name>
